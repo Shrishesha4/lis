@@ -1,0 +1,352 @@
+[
+  {
+    "reportedAt": "2026-04-27 18:16",
+    "analyzerId": "V1277",
+    "patient": {
+      "patientId": "",
+      "lastName": "",
+      "firstName": "",
+      "dob": "",
+      "gender": ""
+    },
+    "orders": [
+      {
+        "sampleId": "89781",
+        "results": [
+          {
+            "testCode": "300",
+            "value": "86.4",
+            "units": "mg/dL",
+            "abnormalFlag": "Normal",
+            "isAbnormal": false,
+            "collectedAt": "2026-04-27 08:15:32",
+            "resultedAt": "560012"
+          },
+          {
+            "testCode": "301",
+            "value": "5.47",
+            "units": "g/dL",
+            "abnormalFlag": "Normal",
+            "isAbnormal": false,
+            "collectedAt": "2026-04-27 08:15:13",
+            "resultedAt": "560012"
+          },
+          {
+            "testCode": "302",
+            "value": "4.02",
+            "units": "mg/dL",
+            "abnormalFlag": "Normal",
+            "isAbnormal": false,
+            "collectedAt": "2026-04-27 08:15:41",
+            "resultedAt": "560012"
+          },
+          {
+            "testCode": "303",
+            "value": "4.60",
+            "units": "g/dL",
+            "abnormalFlag": "Normal",
+            "isAbnormal": false,
+            "collectedAt": "2026-04-27 08:12:02",
+            "resultedAt": "560012"
+          },
+          {
+            "testCode": "304",
+            "value": "162.8",
+            "units": "mg/dL",
+            "abnormalFlag": "Abnormal",
+            "isAbnormal": true,
+            "collectedAt": "2026-04-27 08:15:51",
+            "resultedAt": "560012"
+          },
+          {
+            "testCode": "305",
+            "value": "231.2",
+            "units": "mg/dL",
+            "abnormalFlag": "Normal",
+            "isAbnormal": false,
+            "collectedAt": "2026-04-27 08:14:44",
+            "resultedAt": "560012"
+          },
+          {
+            "testCode": "307",
+            "value": "93.9",
+            "units": "mmol/L",
+            "abnormalFlag": "Normal",
+            "isAbnormal": false,
+            "collectedAt": "2026-04-27 08:12:40",
+            "resultedAt": "560012"
+          },
+          {
+            "testCode": "308",
+            "value": "3.79",
+            "units": "mmol/L",
+            "abnormalFlag": "Normal",
+            "isAbnormal": false,
+            "collectedAt": "2026-04-27 08:13:01",
+            "resultedAt": "560012"
+          },
+          {
+            "testCode": "309",
+            "value": "138.8",
+            "units": "mmol/L",
+            "abnormalFlag": "Normal",
+            "isAbnormal": false,
+            "collectedAt": "2026-04-27 08:12:50",
+            "resultedAt": "560012"
+          },
+          {
+            "testCode": "310",
+            "value": "26.8",
+            "units": "mmol/L",
+            "abnormalFlag": "Normal",
+            "isAbnormal": false,
+            "collectedAt": "2026-04-27 08:15:03",
+            "resultedAt": "560012"
+          },
+          {
+            "testCode": "314",
+            "value": "1.67",
+            "units": "mg/dL",
+            "abnormalFlag": "Normal",
+            "isAbnormal": false,
+            "collectedAt": "2026-04-27 08:14:53",
+            "resultedAt": "560012"
+          },
+          {
+            "testCode": "315",
+            "value": "31.6",
+            "units": "mg/dL(A)",
+            "abnormalFlag": "Normal",
+            "isAbnormal": false,
+            "collectedAt": "2026-04-27 08:15:22",
+            "resultedAt": "560012"
+          },
+          {
+            "testCode": "317",
+            "value": "3.206",
+            "units": "mg/dL",
+            "abnormalFlag": "Normal",
+            "isAbnormal": false,
+            "collectedAt": "2026-04-27 08:15:03",
+            "resultedAt": "560012"
+          },
+          {
+            "testCode": "319",
+            "value": "4.734",
+            "units": "mg/dL",
+            "abnormalFlag": "Normal",
+            "isAbnormal": false,
+            "collectedAt": "2026-04-27 08:15:12",
+            "resultedAt": "560012"
+          },
+          {
+            "testCode": "320",
+            "value": "46.9",
+            "units": "U/L",
+            "abnormalFlag": "Normal",
+            "isAbnormal": false,
+            "collectedAt": "2026-04-27 08:15:22",
+            "resultedAt": "560012"
+          },
+          {
+            "testCode": "321",
+            "value": "63.7",
+            "units": "U/L",
+            "abnormalFlag": "Normal",
+            "isAbnormal": false,
+            "collectedAt": "2026-04-27 08:15:31",
+            "resultedAt": "560012"
+          },
+          {
+            "testCode": "326",
+            "value": "57.2",
+            "units": "U/L",
+            "abnormalFlag": "Normal",
+            "isAbnormal": false,
+            "collectedAt": "2026-04-27 08:15:41",
+            "resultedAt": "560012"
+          },
+          {
+            "testCode": "327",
+            "value": "0.883",
+            "units": "mg/dL",
+            "abnormalFlag": "Normal",
+            "isAbnormal": false,
+            "collectedAt": "2026-04-27 08:15:03",
+            "resultedAt": "560012"
+          },
+          {
+            "testCode": "356",
+            "value": "79.0",
+            "units": "mg/dL",
+            "abnormalFlag": "Abnormal",
+            "isAbnormal": true,
+            "collectedAt": "2026-04-27 08:16:19",
+            "resultedAt": "560012"
+          },
+          {
+            "testCode": "357",
+            "value": "31.5",
+            "units": "U/L",
+            "abnormalFlag": "Normal",
+            "isAbnormal": false,
+            "collectedAt": "2026-04-27 08:15:50",
+            "resultedAt": "560012"
+          },
+          {
+            "testCode": "905",
+            "value": "1.528",
+            "units": "mg/dL",
+            "abnormalFlag": "Normal",
+            "isAbnormal": false,
+            "collectedAt": "2026-04-27 08:15:12",
+            "resultedAt": "560012"
+          },
+          {
+            "testCode": "912",
+            "value": "32.6",
+            "units": "mg/dL",
+            "abnormalFlag": "Normal",
+            "isAbnormal": false,
+            "collectedAt": "2026-04-27 08:15:51",
+            "resultedAt": "560012"
+          },
+          {
+            "testCode": "916",
+            "value": "119.6",
+            "units": "mg/dL",
+            "abnormalFlag": "Normal",
+            "isAbnormal": false,
+            "collectedAt": "2026-04-27 08:16:19",
+            "resultedAt": "560012"
+          },
+          {
+            "testCode": "917",
+            "value": "2.9",
+            "units": "",
+            "abnormalFlag": "Normal",
+            "isAbnormal": false,
+            "collectedAt": "2026-04-27 08:16:19",
+            "resultedAt": "560012"
+          },
+          {
+            "testCode": "950",
+            "value": null,
+            "units": "",
+            "abnormalFlag": "Normal",
+            "isAbnormal": false,
+            "collectedAt": "2026-04-27 08:08:56",
+            "resultedAt": "560012"
+          },
+          {
+            "testCode": "951",
+            "value": null,
+            "units": "",
+            "abnormalFlag": "Normal",
+            "isAbnormal": false,
+            "collectedAt": "2026-04-27 08:08:56",
+            "resultedAt": "560012"
+          },
+          {
+            "testCode": "952",
+            "value": null,
+            "units": "",
+            "abnormalFlag": "Normal",
+            "isAbnormal": false,
+            "collectedAt": "2026-04-27 08:08:56",
+            "resultedAt": "560012"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "reportedAt": "2026-04-27 18:16",
+    "analyzerId": "V1277",
+    "patient": {
+      "patientId": "",
+      "lastName": "",
+      "firstName": "",
+      "dob": "",
+      "gender": ""
+    },
+    "orders": [
+      {
+        "sampleId": "40472",
+        "results": [
+          {
+            "testCode": "005",
+            "value": "17.17",
+            "units": "pg/mL",
+            "abnormalFlag": "Normal",
+            "isAbnormal": false,
+            "collectedAt": "2026-04-27 08:33:45",
+            "resultedAt": "560012"
+          },
+          {
+            "testCode": "004",
+            "value": "4.953",
+            "units": "ng/dL",
+            "abnormalFlag": "Normal",
+            "isAbnormal": false,
+            "collectedAt": "2026-04-27 08:34:04",
+            "resultedAt": "560012"
+          },
+          {
+            "testCode": "035",
+            "value": "5.2787",
+            "units": "uIU/mL",
+            "abnormalFlag": "Normal",
+            "isAbnormal": false,
+            "collectedAt": "2026-04-27 08:33:26",
+            "resultedAt": "560012"
+          },
+          {
+            "testCode": "950",
+            "value": null,
+            "units": "",
+            "abnormalFlag": "Normal",
+            "isAbnormal": false,
+            "collectedAt": "2026-04-27 08:08:56",
+            "resultedAt": "560012"
+          },
+          {
+            "testCode": "951",
+            "value": null,
+            "units": "",
+            "abnormalFlag": "Normal",
+            "isAbnormal": false,
+            "collectedAt": "2026-04-27 08:08:56",
+            "resultedAt": "560012"
+          },
+          {
+            "testCode": "952",
+            "value": null,
+            "units": "",
+            "abnormalFlag": "Normal",
+            "isAbnormal": false,
+            "collectedAt": "2026-04-27 08:08:56",
+            "resultedAt": "560012"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "reportedAt": "2026-04-27 18:16",
+    "analyzerId": "V1277",
+    "patient": {
+      "patientId": "",
+      "lastName": "",
+      "firstName": "",
+      "dob": "",
+      "gender": ""
+    },
+    "orders": [
+      {
+        "sampleId": "40473",
+        "results": []
+      }
+    ]
+  }
+]

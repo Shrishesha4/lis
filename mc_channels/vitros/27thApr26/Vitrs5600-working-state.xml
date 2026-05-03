@@ -1,0 +1,327 @@
+<channel version="4.5.2">
+  <id>b5c1b056-03f9-4219-b9dd-28ce920047fd</id>
+  <nextMetaDataId>2</nextMetaDataId>
+  <name>Vitrs5600</name>
+  <description></description>
+  <revision>19</revision>
+  <sourceConnector version="4.5.2">
+    <metaDataId>0</metaDataId>
+    <name>sourceConnector</name>
+    <properties class="com.mirth.connect.connectors.tcp.TcpReceiverProperties" version="4.5.2">
+      <pluginProperties/>
+      <listenerConnectorProperties version="4.5.2">
+        <host>0.0.0.0</host>
+        <port>3020</port>
+      </listenerConnectorProperties>
+      <sourceConnectorProperties version="4.5.2">
+        <responseVariable>Postprocessor</responseVariable>
+        <respondAfterProcessing>true</respondAfterProcessing>
+        <processBatch>false</processBatch>
+        <firstResponse>true</firstResponse>
+        <processingThreads>1</processingThreads>
+        <resourceIds class="linked-hash-map">
+          <entry>
+            <string>Default Resource</string>
+            <string>[Default Resource]</string>
+          </entry>
+        </resourceIds>
+        <queueBufferSize>1000</queueBufferSize>
+      </sourceConnectorProperties>
+      <transmissionModeProperties class="com.mirth.connect.model.transmission.framemode.FrameModeProperties">
+        <pluginPointName>Basic</pluginPointName>
+        <startOfMessageBytes></startOfMessageBytes>
+        <endOfMessageBytes></endOfMessageBytes>
+      </transmissionModeProperties>
+      <serverMode>true</serverMode>
+      <remoteAddress></remoteAddress>
+      <remotePort></remotePort>
+      <overrideLocalBinding>false</overrideLocalBinding>
+      <reconnectInterval>5000</reconnectInterval>
+      <receiveTimeout>5000</receiveTimeout>
+      <bufferSize>65536</bufferSize>
+      <maxConnections>1</maxConnections>
+      <keepConnectionOpen>true</keepConnectionOpen>
+      <dataTypeBinary>false</dataTypeBinary>
+      <charsetEncoding>DEFAULT_ENCODING</charsetEncoding>
+      <respondOnNewConnection>0</respondOnNewConnection>
+      <responseAddress></responseAddress>
+      <responsePort></responsePort>
+    </properties>
+    <transformer version="4.5.2">
+      <elements/>
+      <inboundTemplate encoding="base64"></inboundTemplate>
+      <outboundTemplate encoding="base64"></outboundTemplate>
+      <inboundDataType>RAW</inboundDataType>
+      <outboundDataType>RAW</outboundDataType>
+      <inboundProperties class="com.mirth.connect.plugins.datatypes.raw.RawDataTypeProperties" version="4.5.2">
+        <batchProperties class="com.mirth.connect.plugins.datatypes.raw.RawBatchProperties" version="4.5.2">
+          <splitType>JavaScript</splitType>
+          <batchScript></batchScript>
+        </batchProperties>
+      </inboundProperties>
+      <outboundProperties class="com.mirth.connect.plugins.datatypes.raw.RawDataTypeProperties" version="4.5.2">
+        <batchProperties class="com.mirth.connect.plugins.datatypes.raw.RawBatchProperties" version="4.5.2">
+          <splitType>JavaScript</splitType>
+          <batchScript></batchScript>
+        </batchProperties>
+      </outboundProperties>
+    </transformer>
+    <filter version="4.5.2">
+      <elements/>
+    </filter>
+    <transportName>TCP Listener</transportName>
+    <mode>SOURCE</mode>
+    <enabled>true</enabled>
+    <waitForPrevious>true</waitForPrevious>
+  </sourceConnector>
+  <destinationConnectors>
+    <connector version="4.5.2">
+      <metaDataId>1</metaDataId>
+      <name>Destination</name>
+      <properties class="com.mirth.connect.connectors.file.FileDispatcherProperties" version="4.5.2">
+        <pluginProperties/>
+        <destinationConnectorProperties version="4.5.2">
+          <queueEnabled>false</queueEnabled>
+          <sendFirst>false</sendFirst>
+          <retryIntervalMillis>10000</retryIntervalMillis>
+          <regenerateTemplate>false</regenerateTemplate>
+          <retryCount>0</retryCount>
+          <rotate>false</rotate>
+          <includeFilterTransformer>false</includeFilterTransformer>
+          <threadCount>1</threadCount>
+          <threadAssignmentVariable></threadAssignmentVariable>
+          <validateResponse>false</validateResponse>
+          <resourceIds class="linked-hash-map">
+            <entry>
+              <string>Default Resource</string>
+              <string>[Default Resource]</string>
+            </entry>
+          </resourceIds>
+          <queueBufferSize>1000</queueBufferSize>
+          <reattachAttachments>true</reattachAttachments>
+        </destinationConnectorProperties>
+        <scheme>FILE</scheme>
+        <host>/Users/aadhi/Desktop/mc</host>
+        <outputPattern>output.json</outputPattern>
+        <anonymous>true</anonymous>
+        <username>anonymous</username>
+        <password>anonymous</password>
+        <timeout>10000</timeout>
+        <keepConnectionOpen>true</keepConnectionOpen>
+        <maxIdleTime>0</maxIdleTime>
+        <secure>true</secure>
+        <passive>true</passive>
+        <validateConnection>true</validateConnection>
+        <outputAppend>true</outputAppend>
+        <errorOnExists>false</errorOnExists>
+        <temporary>false</temporary>
+        <binary>false</binary>
+        <charsetEncoding>DEFAULT_ENCODING</charsetEncoding>
+        <template>${message.encodedData}
+---</template>
+      </properties>
+      <transformer version="4.5.2">
+        <elements>
+          <com.mirth.connect.plugins.javascriptstep.JavaScriptStep version="4.5.2">
+            <sequenceNumber>0</sequenceNumber>
+            <enabled>true</enabled>
+            <script>// Get raw data directly in destination
+var raw = connectorMessage.getRawData();
+
+// Use Java replaceAll to strip ASTM control characters
+raw = java.lang.String.valueOf(raw).replaceAll(&apos;[\\x02\\x03\\x04\\x05\\x06]&apos;, &apos;&apos;);
+raw = java.lang.String.valueOf(raw).replaceAll(&apos;[0-9A-Fa-f]{2}\\r&apos;, &apos;\r&apos;);
+
+var lines = raw.split(&apos;\r&apos;);
+
+var result = {
+  patient: {},
+  orders: [],
+  results: []
+};
+
+var currentOrder = null;
+
+for (var i = 0; i &lt; lines.length; i++) {
+  var line = lines[i].trim();
+  if (line.length === 0) continue;
+
+  if (/^\d/.test(line)) {
+    line = line.substring(1);
+  }
+
+  var fields = line.split(&apos;|&apos;);
+  var recordType = fields[0];
+
+  switch (recordType) {
+    case &apos;H&apos;:
+      result.header = {
+        senderId:     fields[4] || &apos;&apos;,
+        processingId: fields[11] || &apos;&apos;,
+        timestamp:    fields[13] || &apos;&apos;
+      };
+      break;
+
+    case &apos;P&apos;:
+      result.patient = {
+        patientId: fields[3] || &apos;&apos;,
+        lastName:  fields[5] ? fields[5].split(&apos;^&apos;)[0] : &apos;&apos;,
+        firstName: fields[5] ? fields[5].split(&apos;^&apos;)[1] : &apos;&apos;,
+        dob:       fields[7] || &apos;&apos;,
+        gender:    fields[8] || &apos;&apos;
+      };
+      break;
+
+    case &apos;O&apos;:
+      currentOrder = {
+        specimenId:   fields[2] || &apos;&apos;,
+        testId:       fields[4] ? java.lang.String.valueOf(fields[4]).replaceAll(&apos;\\^+&apos;, &apos;&apos;).trim() : &apos;&apos;,
+        priority:     fields[5] || &apos;&apos;,
+        orderTime:    fields[7] || &apos;&apos;,
+        specimenType: fields[15] || &apos;&apos;,
+        results:      []
+      };
+      result.orders.push(currentOrder);
+      break;
+
+    case &apos;R&apos;:
+      var resultRecord = {
+        testCode:     fields[2] ? java.lang.String.valueOf(fields[2]).replaceAll(&apos;\\^+&apos;, &apos;&apos;).trim() : &apos;&apos;,
+        value:        fields[3] || &apos;&apos;,
+        units:        fields[4] || &apos;&apos;,
+        refRange:     fields[5] || &apos;&apos;,
+        abnormalFlag: fields[6] || &apos;&apos;,
+        status:       fields[8] || &apos;&apos;,
+        timestamp:    fields[12] || &apos;&apos;
+      };
+      result.results.push(resultRecord);
+      if (currentOrder) {
+        currentOrder.results.push(resultRecord);
+      }
+      break;
+
+    case &apos;L&apos;:
+      result.status = &apos;complete&apos;;
+      break;
+  }
+}
+
+return JSON.stringify(result, null, 2);</script>
+          </com.mirth.connect.plugins.javascriptstep.JavaScriptStep>
+        </elements>
+        <inboundTemplate encoding="base64"></inboundTemplate>
+        <outboundTemplate encoding="base64"></outboundTemplate>
+        <inboundDataType>RAW</inboundDataType>
+        <outboundDataType>RAW</outboundDataType>
+        <inboundProperties class="com.mirth.connect.plugins.datatypes.raw.RawDataTypeProperties" version="4.5.2">
+          <batchProperties class="com.mirth.connect.plugins.datatypes.raw.RawBatchProperties" version="4.5.2">
+            <splitType>JavaScript</splitType>
+            <batchScript></batchScript>
+          </batchProperties>
+        </inboundProperties>
+        <outboundProperties class="com.mirth.connect.plugins.datatypes.raw.RawDataTypeProperties" version="4.5.2">
+          <batchProperties class="com.mirth.connect.plugins.datatypes.raw.RawBatchProperties" version="4.5.2">
+            <splitType>JavaScript</splitType>
+            <batchScript></batchScript>
+          </batchProperties>
+        </outboundProperties>
+      </transformer>
+      <responseTransformer version="4.5.2">
+        <elements/>
+        <inboundDataType>RAW</inboundDataType>
+        <outboundDataType>RAW</outboundDataType>
+        <inboundProperties class="com.mirth.connect.plugins.datatypes.raw.RawDataTypeProperties" version="4.5.2">
+          <batchProperties class="com.mirth.connect.plugins.datatypes.raw.RawBatchProperties" version="4.5.2">
+            <splitType>JavaScript</splitType>
+            <batchScript></batchScript>
+          </batchProperties>
+        </inboundProperties>
+        <outboundProperties class="com.mirth.connect.plugins.datatypes.raw.RawDataTypeProperties" version="4.5.2">
+          <batchProperties class="com.mirth.connect.plugins.datatypes.raw.RawBatchProperties" version="4.5.2">
+            <splitType>JavaScript</splitType>
+            <batchScript></batchScript>
+          </batchProperties>
+        </outboundProperties>
+      </responseTransformer>
+      <filter version="4.5.2">
+        <elements/>
+      </filter>
+      <transportName>File Writer</transportName>
+      <mode>DESTINATION</mode>
+      <enabled>true</enabled>
+      <waitForPrevious>true</waitForPrevious>
+    </connector>
+  </destinationConnectors>
+  <preprocessingScript>// Strip ASTM LIS2-A2 control characters
+var raw = message;
+
+// Remove STX (0x02), ETX (0x03), ENQ (0x05), EOT (0x04), ACK (0x06)
+// Remove frame numbers (single digit after STX)
+raw = raw.replace(/[\x02\x03\x04\x05\x06]/g, &apos;&apos;);
+
+// Remove checksum bytes at end of each frame (2 hex chars before CR)
+raw = raw.replace(/[0-9A-Fa-f]{2}\r/g, &apos;\r&apos;);
+
+// Normalize line endings
+raw = raw.replace(/\r\n/g, &apos;\r&apos;).replace(/\n/g, &apos;\r&apos;);
+
+return raw;
+//return;</preprocessingScript>
+  <postprocessingScript>// This script executes once after a message has been processed
+// Responses returned from here will be stored as &quot;Postprocessor&quot; in the response map
+return &apos;\x06&apos;;</postprocessingScript>
+  <deployScript>// This script executes once when the channel is deployed
+// You only have access to the globalMap and globalChannelMap here to persist data
+return;</deployScript>
+  <undeployScript>// This script executes once when the channel is undeployed
+// You only have access to the globalMap and globalChannelMap here to persist data
+return;</undeployScript>
+  <properties version="4.5.2">
+    <clearGlobalChannelMap>true</clearGlobalChannelMap>
+    <messageStorageMode>DEVELOPMENT</messageStorageMode>
+    <encryptData>false</encryptData>
+    <encryptAttachments>false</encryptAttachments>
+    <encryptCustomMetaData>false</encryptCustomMetaData>
+    <removeContentOnCompletion>false</removeContentOnCompletion>
+    <removeOnlyFilteredOnCompletion>false</removeOnlyFilteredOnCompletion>
+    <removeAttachmentsOnCompletion>false</removeAttachmentsOnCompletion>
+    <initialState>STARTED</initialState>
+    <storeAttachments>true</storeAttachments>
+    <metaDataColumns>
+      <metaDataColumn>
+        <name>SOURCE</name>
+        <type>STRING</type>
+        <mappingName>mirth_source</mappingName>
+      </metaDataColumn>
+      <metaDataColumn>
+        <name>TYPE</name>
+        <type>STRING</type>
+        <mappingName>mirth_type</mappingName>
+      </metaDataColumn>
+    </metaDataColumns>
+    <attachmentProperties version="4.5.2">
+      <type>None</type>
+      <properties/>
+    </attachmentProperties>
+    <resourceIds class="linked-hash-map">
+      <entry>
+        <string>Default Resource</string>
+        <string>[Default Resource]</string>
+      </entry>
+    </resourceIds>
+  </properties>
+  <exportData>
+    <metadata>
+      <enabled>true</enabled>
+      <lastModified>
+        <time>1777292711132</time>
+        <timezone>Asia/Kolkata</timezone>
+      </lastModified>
+      <pruningSettings>
+        <archiveEnabled>true</archiveEnabled>
+        <pruneErroredMessages>false</pruneErroredMessages>
+      </pruningSettings>
+      <userId>1</userId>
+    </metadata>
+  </exportData>
+</channel>
